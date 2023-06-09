@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dictionary.Models.User;
@@ -24,7 +25,7 @@ public class ApiController {
 
     @Autowired
     private WordsRepo wordsRepo;
-    
+
     @GetMapping(value="/")
     public String getPage(){
         return "Welcome";
@@ -55,9 +56,14 @@ public class ApiController {
         return "User Updated";
     }
 
-    //Dictionary
+    //All dictionary words
     @GetMapping(value = "/dictionary")
     public List<Words> getDictionary(){
         return wordsRepo.findAll();
+    }
+
+    @GetMapping("/dictionary")
+    public List<Words> getNames(@RequestParam("word") String word) {
+        return wordsRepo.findByWord(word);
     }
 }
