@@ -17,13 +17,13 @@ public class Words {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "word")
+    @Column(name = "word", nullable = false)
     private String word;
 
     @Column(name = "wordtype")
     private String wordType;
 
-    @Column(name = "definition")
+    @Column(name = "definition", columnDefinition = "longtext", nullable = false)
     private String definition;
 
 }

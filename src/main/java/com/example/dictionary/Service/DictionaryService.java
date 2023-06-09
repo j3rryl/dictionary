@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.dictionary.Models.User;
 import com.example.dictionary.Models.Words;
-import com.example.dictionary.Repos.UserRepo;
 import com.example.dictionary.Repos.WordsRepo;
 
 @Service
