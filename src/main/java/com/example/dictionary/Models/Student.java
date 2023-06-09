@@ -1,4 +1,4 @@
-package com.example.dictionary;
+package com.example.dictionary.Models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
