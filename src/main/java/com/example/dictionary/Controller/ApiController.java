@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,9 @@ import com.example.dictionary.Service.DictionaryService;
 import com.example.dictionary.Service.UserService;
 
 @RestController
+@RequestMapping("api")
+
+//Research on path vs value
 public class ApiController {
     private final UserService userService;
     private final DictionaryService dictionaryService;
@@ -35,9 +39,9 @@ public class ApiController {
     @Autowired
     private WordsRepo wordsRepo;
 
-    @GetMapping(value="/")
+    @GetMapping(value = "")
     public String getPage(){
-        return "Welcome";
+        return "Welcome to the dictionary API.";
     }
 
     @GetMapping(value = "/users")
@@ -46,14 +50,14 @@ public class ApiController {
     }
 
     //Get user by id
-    @GetMapping(value = "user/{id}")
+    @GetMapping(value = "/user/{id}")
     public String getUser(@PathVariable long id){
         User fetchedUser = userRepo.findById(id).get();
         return "Fetch 1 user: \n"+ fetchedUser;
     }
 
     //Get users by name
-    @GetMapping(value = "user")
+    @GetMapping(value = "/user")
     public List<User> getUsersByName(@RequestParam("firstName") String firstName){
         return userService.getUsersByName(firstName);
     }
@@ -85,7 +89,7 @@ public class ApiController {
     }
 
     //Get users by name
-    @GetMapping(value = "word")
+    @GetMapping(value = "/word")
     public List<Words> getWordsByWord(@RequestParam("word") String word){
         // return dictionaryService.getWordsByWord(word);
         return wordsRepo.findByWord(word);
