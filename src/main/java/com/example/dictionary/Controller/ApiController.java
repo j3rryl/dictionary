@@ -20,7 +20,7 @@ import com.example.dictionary.Service.DictionaryService;
 import com.example.dictionary.Service.UserService;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("dictionary/api")
 
 //Research on path vs value
 public class ApiController {
