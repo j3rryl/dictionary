@@ -3,6 +3,7 @@ package com.example.dictionary.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.example.dictionary.Service.UserService;
 
 @RestController
 @RequestMapping("dictionary/api")
+@CrossOrigin(origins = "*")
 
 //Research on path vs value
 public class ApiController {
