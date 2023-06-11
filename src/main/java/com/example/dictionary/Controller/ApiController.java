@@ -98,7 +98,7 @@ public class ApiController {
     //Get users by name
     @GetMapping(value = "/word", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getWordsByWord(@RequestParam("word") String searchQuery){
-        String notFound = "Can't find the meaning of '" + searchQuery + "'. Please, try to search for another word";
+        String notFound = "Can't find the meaning of '" + searchQuery + "'. Please, try to search for another word.";
 
         // return dictionaryService.getWordsByWord(word);
         List<Words> results = wordsRepo.findByWord(searchQuery.trim());

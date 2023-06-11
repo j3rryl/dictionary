@@ -45,7 +45,7 @@ public class IndexController {
     @PostMapping("/home")
     public String search(@RequestParam("searchWord") String searchWord, Model model){
         List<Words> results = wordsRepo.findByWord(searchWord.trim());
-        String notFound="Can't find the meaning of '" + searchWord + "'. Please, try to search for another word";
+        String notFound="Can't find the meaning of '" + searchWord + "'. Please, try to search for another word.";
         if(results.isEmpty()){
             model.addAttribute("emptyArray", true);
             model.addAttribute("notFound", notFound);
