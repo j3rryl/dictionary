@@ -25,7 +25,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(){
-        return "index";
+        return "home";
     }
 
     @PostMapping("/new-user")
