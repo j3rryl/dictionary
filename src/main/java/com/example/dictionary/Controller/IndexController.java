@@ -1,6 +1,5 @@
 package com.example.dictionary.Controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.dictionary.Models.User;
+import com.example.dictionary.Models.Words;
 import com.example.dictionary.Repos.UserRepo;
+import com.example.dictionary.Repos.WordsRepo;
 
 @Controller
 public class IndexController {
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private WordsRepo wordsRepo;
 
     @GetMapping("/")
     public String index(){
@@ -31,9 +36,16 @@ public class IndexController {
         // return "New user added";
     }
 
-    @GetMapping("/dynamic")
-    public String dynamic(Model model){
-        model.addAttribute("employees", userRepo.findAll());
-        return "dynamic";
+    @GetMapping("/home")
+    public String homePage(Model model){
+        // model.addAttribute("results", results);
+        return "home";
+    }
+
+    @PostMapping("/search")
+    public String search(@RequestParam("searchWord") String searchWord, Model model){
+        List<Words> results = wordsRepo.findByWord(searchWord);
+        model.addAttribute("results", results);
+        return "home";
     }
 }

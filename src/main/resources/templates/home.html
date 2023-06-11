@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Dictionary Application</title>
+    <style th:inline="text">
+        body{
+            background: url([[@{/images/scrabble.jpg}]]);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4 class="title">English Dictionary</h4>
+        <form th:action="@{/search}" method="post" class="search-bar">
+            <input type="search" placeholder="Search a word" name="searchWord"/>
+            <button type="submit">
+                <img th:src="@{/images/search.png}"/>
+            </button>
+        </form>
+        <div class="content" th:each="result: ${results}">
+            <div class="content-title">
+                <p class="word" th:text="${result.word}"></p>
+                <p class="word-type" th:text="${result.wordType}"></p>
+            </div>
+            <hr/>
+            <div class="content-definition">
+                <p>Definition</p>
+                <p class="definition" th:text="${result.definition}">
+                </p>
+            </div>
+            <hr/>
+        </div>
+        <p class="info">Type any existing word and press enter to get meaning, example, synonyms, etc.</p>
+    </div>
+</body>
+</html>
