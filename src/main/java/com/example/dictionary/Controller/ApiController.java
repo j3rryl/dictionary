@@ -3,6 +3,9 @@ package com.example.dictionary.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +22,8 @@ import com.example.dictionary.Repos.UserRepo;
 import com.example.dictionary.Repos.WordsRepo;
 import com.example.dictionary.Service.DictionaryService;
 import com.example.dictionary.Service.UserService;
+
+import lombok.Data;
 
 @RestController
 @RequestMapping("dictionary/api")
@@ -91,9 +96,36 @@ public class ApiController {
     }
 
     //Get users by name
-    @GetMapping(value = "/word")
-    public List<Words> getWordsByWord(@RequestParam("word") String word){
+    @GetMapping(value = "/word", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getWordsByWord(@RequestParam("word") String searchQuery){
+        String notFound = "Can't find the meaning of '" + searchQuery + "'. Please, try to search for another word";
+
         // return dictionaryService.getWordsByWord(word);
-        return wordsRepo.findByWord(word.trim());
+        List<Words> results = wordsRepo.findByWord(searchQuery.trim());
+
+        if(results.isEmpty()){
+            // return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(notFound));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(false, notFound));
+
+        } else {
+            return ResponseEntity.ok(new ApiResponse(true, results));
+        }
+    }
+
+    @Data
+    private static class ApiResponse {
+        private Boolean success;
+        private String message;
+        private List<Words> results;
+
+        public ApiResponse(Boolean success, String message) {
+            this.success = success;
+            this.message = message;
+        }
+
+        public ApiResponse(Boolean success, List<Words> results) {
+            this.success = success;
+            this.results = results;
+        }
     }
 }
