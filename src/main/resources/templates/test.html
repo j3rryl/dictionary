@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Page</title>
+</head>
+<body>
+    <h1>Dynamic page. I work yaaay!</h1>
+    <ul>
+        <li th:each="employee: ${employees}">
+            <span th:text="${employee.firstName}"></span>
+            <span> </span>
+            <span th:text="${employee.lastName}"></span>
+            <span>, </span>
+            <span th:text="${employee.age}"></span>
+            <span>, </span>
+            <span th:text="${employee.occupation}"></span>
+        </li>
+    </ul>
+    <form th:action="@{/new-user}" method="post">
+        <button type="submit">Add User</button>
+    </form>
+</body>
+</html>

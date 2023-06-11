@@ -1,0 +1,19 @@
+body{
+    background-color: rgb(224, 214, 214);
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+.container{
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    width: 40%;
+    height: 40%;
+    margin: 0 auto;
+    border-radius: 14px;
+    background-color: white;
+    box-shadow: 5px 10px #888888;
+    padding: 8px;
+}
