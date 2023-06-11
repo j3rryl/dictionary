@@ -105,7 +105,7 @@ public class ApiController {
 
         if(results.isEmpty()){
             // return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(notFound));
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(false, notFound));
+            return ResponseEntity.ok(new ApiResponse(false, notFound));
 
         } else {
             return ResponseEntity.ok(new ApiResponse(true, results));
