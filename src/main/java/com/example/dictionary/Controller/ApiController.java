@@ -94,6 +94,6 @@ public class ApiController {
     @GetMapping(value = "/word")
     public List<Words> getWordsByWord(@RequestParam("word") String word){
         // return dictionaryService.getWordsByWord(word);
-        return wordsRepo.findByWord(word);
+        return wordsRepo.findByWord(word.trim());
     }
 }
