@@ -15,12 +15,15 @@
 <body>
     <div class="container">
         <h4 class="title">English Dictionary</h4>
-        <form th:action="@{/search}" method="post" class="search-bar">
+        <form th:action="@{/home}" method="post" class="search-bar">
             <input type="search" placeholder="Search a word" name="searchWord"/>
             <button type="submit">
                 <img th:src="@{/images/search.png}"/>
             </button>
         </form>
+        <div th:if="${emptyArray}">
+            <p th:text="${notFound}"></p>
+        </div>
         <div class="content" th:each="result: ${results}">
             <div class="content-title">
                 <p class="word" th:text="${result.word}"></p>

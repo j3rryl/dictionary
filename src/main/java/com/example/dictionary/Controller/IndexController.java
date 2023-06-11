@@ -42,10 +42,17 @@ public class IndexController {
         return "home";
     }
 
-    @PostMapping("/search")
+    @PostMapping("/home")
     public String search(@RequestParam("searchWord") String searchWord, Model model){
         List<Words> results = wordsRepo.findByWord(searchWord);
-        model.addAttribute("results", results);
+        String notFound="Can't find the meaning of '" + searchWord + "'. Please, try to search for another word";
+        if(results.isEmpty()){
+            model.addAttribute("emptyArray", true);
+            model.addAttribute("notFound", notFound);
+        } else {
+            model.addAttribute("emptyArray", false);
+            model.addAttribute("results", results);
+        }
         return "home";
     }
 }
