@@ -17,7 +17,7 @@
     <div class="container">
         <h4 class="title">English Dictionary</h4>
         <form th:action="@{/home}" method="post" class="search-bar">
-            <input type="search" placeholder="Search a word" name="searchWord"/>
+            <input type="search" placeholder="Search a word" name="searchWord" required/>
             <button type="submit">
                 <img th:src="@{/images/search.png}"/>
             </button>
