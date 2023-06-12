@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.dictionary.Models.User;
-import com.example.dictionary.Models.Words;
+import com.example.dictionary.Models.Word;
 import com.example.dictionary.Repos.UserRepo;
 import com.example.dictionary.Repos.WordsRepo;
 
@@ -44,7 +44,7 @@ public class IndexController {
 
     @PostMapping("/home")
     public String search(@RequestParam("searchWord") String searchWord, Model model){
-        List<Words> results = wordsRepo.findByWord(searchWord.trim());
+        List<Word> results = wordsRepo.findByWord(searchWord.trim());
         String notFound="Can't find the meaning of '" + searchWord + "'. Please, try to search for another word.";
         if(results.isEmpty()){
             model.addAttribute("emptyArray", true);

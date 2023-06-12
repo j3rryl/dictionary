@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dictionary.Models.ApiResponse;
 import com.example.dictionary.Models.User;
-import com.example.dictionary.Models.Words;
+import com.example.dictionary.Models.Word;
 import com.example.dictionary.Repos.UserRepo;
 import com.example.dictionary.Repos.WordsRepo;
 import com.example.dictionary.Service.DictionaryService;
@@ -89,7 +89,7 @@ public class ApiController {
 
     //All dictionary words
     @GetMapping(value = "/dictionary")
-    public List<Words> getDictionary(){
+    public List<Word> getDictionary(){
         return wordsRepo.findAll();
     }
 
@@ -99,7 +99,7 @@ public class ApiController {
         String notFound = "Can't find the meaning of '" + searchQuery + "'. Please, try to search for another word.";
 
         // return dictionaryService.getWordsByWord(word);
-        List<Words> results = wordsRepo.findByWord(searchQuery.trim());
+        List<Word> results = wordsRepo.findByWord(searchQuery.trim());
 
         if(results.isEmpty()){
             // return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(notFound));

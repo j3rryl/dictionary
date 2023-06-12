@@ -8,14 +8,14 @@ import lombok.Data;
 public class ApiResponse {
     private Boolean success;
         private String message;
-        private List<Words> results;
+        private List<Word> results;
 
         public ApiResponse(Boolean success, String message) {
             this.success = success;
             this.message = message;
         }
 
-        public ApiResponse(Boolean success, List<Words> results) {
+        public ApiResponse(Boolean success, List<Word> results) {
             this.success = success;
             this.results = results;
         }
