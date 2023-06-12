@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dictionary.Models.ApiResponse;
 import com.example.dictionary.Models.User;
 import com.example.dictionary.Models.Words;
 import com.example.dictionary.Repos.UserRepo;
 import com.example.dictionary.Repos.WordsRepo;
 import com.example.dictionary.Service.DictionaryService;
 import com.example.dictionary.Service.UserService;
-
-import lombok.Data;
 
 @RestController
 @RequestMapping("dictionary/api")
@@ -109,23 +108,6 @@ public class ApiController {
 
         } else {
             return ResponseEntity.ok(new ApiResponse(true, results));
-        }
-    }
-
-    @Data
-    private static class ApiResponse {
-        private Boolean success;
-        private String message;
-        private List<Words> results;
-
-        public ApiResponse(Boolean success, String message) {
-            this.success = success;
-            this.message = message;
-        }
-
-        public ApiResponse(Boolean success, List<Words> results) {
-            this.success = success;
-            this.results = results;
         }
     }
 }
