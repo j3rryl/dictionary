@@ -3,6 +3,7 @@ package com.example.dictionary.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -63,15 +64,19 @@ public class ApiController {
 
     //Get users by name
     @GetMapping(value = "/user")
-    public List<User> getUsersByName(@RequestParam("firstName") String firstName){
-        return userService.getUsersByName(firstName);
+    public ResponseEntity<List<User>> getUsersByName(@RequestParam("firstName") String firstName){
+        if (firstName == null || firstName.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // or return a custom error message
+        }
+        List<User> users = userService.getUsersByName(firstName);
+        return ResponseEntity.ok(users);
     }
 
-    @PostMapping(value = "/save")
-    public String saveUser(@RequestBody User user){
-        //Because it is json hence te @RequestBody
+    @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> saveUser(@RequestBody User user){
+        //Because it is json hence the @RequestBody
         userRepo.save(user);
-        return "Saved";
+        return ResponseEntity.ok(new ApiResponse(true, "User saved successfully!"));
     }
 
     @PutMapping(value = "/update/{id}")
